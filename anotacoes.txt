@@ -1,0 +1,57 @@
+ORM (Object Relational Mapper)
+
+E uma ferramenta que facilita o trabalho com banco de dados em aplicacoes, permitindo que seja feita interacao com o banco sem escrever consultas SQL diretamente.
+
+Com um ORM, manipulamos tabelas e dados do banco como se fossem objetos com a linguagem de programacao, simplificando a leitura, escrita e manutencao do codigo. Ele tambem cuida da conversacao dos dados entre o banco de dados relacional
+(tabelas) e os objetos no codigo.
+
+Vantagens de utilizar um ORM
+
+- Menos codigo SQL
+
+- Facilita manutencao
+
+- Compativel com multiplos banco de dados (se necessario a troca do db, se torna muito mais simples)
+
+Apos as instalacao do prisma vamos executar o código de init para que ele nos retorne os arquivos desejados, sendo esse o codigo:
+
+npx prisma init --datasource-provider postgresql
+
+"postgresql" sendo o db desejado
+
+=============================================================================================================================================================================================================================================
+
+ID UUID X INCREMENTAL
+
+INCREMENTAL = sequencial de 1 em 1
+id publico sendo muito mais facil de deduzir, sendo assim na mao de pessoas que entendem e querem fazer o mal pode encontrar falhas e fazer o que desejar
+
+UUID = muitas regras/padrões para um id, tornando assim mais difícil a dedução do id
+
+=============================================================================================================================================================================================================================================
+
+Para a criação de tabelas com o prisma, utilizamos o arquivo prisma.schema criado pelo nosso codigo de init.
+
+model User{
+
+}
+
+model = modelo da tabelas
+User = nome representativo da tabela
+
+Dentro do objeto daremos os nomes e as atribuições as colunas
+
+model User{
+    id String @id @default(uuid())
+    name String
+    email String @unique
+
+    @@map("users")
+}
+
+id = nome da coluna id | String = type string pois utilizaremos UUID | @id = para definir-la como primaria |  @default = para determinar valor padrão | (uuid()) = valor padrão uuid que sera gerado automaticamente
+
+email @unique = para que cada usuario tenha um email unico
+
+@@map = define o nome da tabela dentro do banco de dados
+
