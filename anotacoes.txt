@@ -89,15 +89,35 @@ A listagem de um usuario com o prisma segue a mesma simplicidade
 
 const users = await prisma.user.findMany();
 
-A funcao findMany() encontrara todos da tabela
+A função findMany() encontrara todos da tabela
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-A listagem de um usuario unico e bem simples tambem
+A listagem de um usuário único e bem simples também
 
 const { id } = request.params;
 
 const user = await prisma.user.findUnique({ where: { id } });
 
 Com o findUnique() precisamos apenas indicar onde sera baseado (where: id)
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Para adicionarmos relacionamento entre as tabelas utilizamos essa sintaxe
+
+user User @relation(fields: [userId], references: [id])
+
+Criamos um usuário com a tipagem (User) e adicionamos uma relação (@relation()) no fields definimos quem sera a chave estrangeira, no references a chave primaria da coluna desejada (lembrando que a tipagem (User) declara qual tabela e)
+
+E preciso declarar tambem que a nossa tabela de Usuario que ela se conecta com a tabela de questoes, com a seguinte sintaxe:
+
+questions Questions[]
+
+Deixando como Array[] declaramos que e uma conexao de um pra muitos = 1 User = Muitas perguntas
+
+Caso seja 1:1 poderiamos declarar apenas 
+
+questions Questions
+
+Sem tornar-la uma Array
 
