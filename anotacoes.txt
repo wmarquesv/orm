@@ -121,3 +121,35 @@ questions Questions
 
 Sem tornar-la uma Array
 
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Para adicionarmos filtro na nossa listagem inves do like ou %palavra desejada% anteriormente, utilizamos a sintaxe dessa forma:
+
+const questions = await prisma.questions.findMany({
+      where: {
+        title: {
+          contains: request.query.title?.toString(),
+          mode: "insensitive",
+        },
+      },
+    });
+
+dentro do nosso método de listagem, adicionamos o (where) para pedir direção, usando o (title) como parâmetro, inves de procurar-mos por idêntico(exatamente igual), utilizamos o contains para substituir o %% ou like do sql sendo ele
+opcional (?.toString().trim()) caso nao queiram fazer a filtragem, adicionamos tambem o (mode: "insensitive") para que ele nao seja case sensitive fazendo assim sua filtragem perante a letra, e nao pela letra exatamente igual
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Para atualizar uma questão utilizaremos esse comando:
+
+const { id } = request.params;
+    const { title, content } = request.body;
+
+    await prisma.questions.update({
+      data: { title, content },
+      where: { id },
+    });
+
+Recuperamos o id da pergunta, o titulo e o conteudo da pergunta, especificamos que queremos atualizar (.update) o conteudo e o titulo(data: {title,content}) do id recuperado (where:{ id })
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
