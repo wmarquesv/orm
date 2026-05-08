@@ -55,3 +55,43 @@ email @unique = para que cada usuario tenha um email unico
 
 @@map = define o nome da tabela dentro do banco de dados
 
+=============================================================================================================================================================================================================================================
+
+Para consultas alem do beekeeper temos outra forma consultar utilizando o proprio prisma, digitando o codigo:
+
+npx prisma studio
+
+Ele nos direciona a uma guia no nosso navegador para um leitor de tabelas
+
+=============================================================================================================================================================================================================================================
+
+A criacao de um usuario no controller com o prisma segue a sintaxe dessa forma:
+
+const { name, email } = request.body;
+
+Recuperamos o name e email no body da nossa requisicao
+
+await prisma.user.create({ data: { name, email } });
+
+E esse e o método para criar um novo usuario
+
+dentro do nosso prisma acessando nosso banco de dados (user) peço para criar (.create) referencio que os dados sao: (data:) e coloco os dados (:{name, email}) 
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+A listagem de um usuario com o prisma segue a mesma simplicidade 
+
+const users = await prisma.user.findMany();
+
+A funcao findMany() encontrara todos da tabela
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+A listagem de um usuario unico e bem simples tambem
+
+const { id } = request.params;
+
+const user = await prisma.user.findUnique({ where: { id } });
+
+Com o findUnique() precisamos apenas indicar onde sera baseado (where: id)
+
