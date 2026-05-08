@@ -153,3 +153,8 @@ Recuperamos o id da pergunta, o titulo e o conteudo da pergunta, especificamos q
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+Para deletar faremos essa sintaxe simples tambem: 
+
+const { id } = request.params;
+
+await prisma.questions.delete({ where: { id } });
