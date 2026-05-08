@@ -158,3 +158,45 @@ Para deletar faremos essa sintaxe simples tambem:
 const { id } = request.params;
 
 await prisma.questions.delete({ where: { id } });
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Utilizar seeds com o prisma segue essa sintaxe:
+
+import { prisma } from "@/prisma";
+
+async function seed() {
+  await prisma.user.createMany({
+    data: [
+      {
+        name: "Jonatan",
+        email: "jonatan@email.com",
+      },
+      {
+        name: "Bruno",
+        email: "bruno@email.com",
+      },
+      {
+        name: "Mikael",
+        email: "mikael@email.com",
+      },
+    ],
+  });
+}
+
+seed().then(() => {
+  console.log("Database seeded");
+  prisma.$disconnect();
+});
+
+
+fazemos uma funcao (seed()) e dentro da tabela Users adicionaremos muitos usuarios (prisma.user.createMany()) adicionamos o conteudo ao nosso db ( data: [{name: w email: w}]) 
+
+criamos a logica com a funcao seed para que quando ela tiver sido executada (.then()) exiba a mensagem desejada (console.log("Database seeded")) e para uma garantia maior criamos um desconnect para nao rodar mais de uma vez no nosso banco
+( prisma.$disconnect())
+
+adicionamos ao nosso package.json um "script" fora do script nomeado como:
+
+"prisma": {
+    "seed": "tsx prisma/seed.ts"
+},
