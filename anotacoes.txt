@@ -55,6 +55,12 @@ email @unique = para que cada usuario tenha um email unico
 
 @@map = define o nome da tabela dentro do banco de dados
 
+Apos a criacao do modelo precisamos da criacao real da tabela, fazemos isso com a seguinte sintaxe no terminal:
+
+npx prisma migrate dev 
+
+com o prisma criando uma pasta e um arquivo das nossas migrations desejadas com o codigo sql dentro dela
+
 =============================================================================================================================================================================================================================================
 
 Para consultas alem do beekeeper temos outra forma consultar utilizando o proprio prisma, digitando o codigo:

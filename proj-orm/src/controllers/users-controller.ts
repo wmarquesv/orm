@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { prisma } from "@/prisma.js";
+import { prisma } from "@/prisma";
 
 class UsersController {
   async index(request: Request, response: Response) {
